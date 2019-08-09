@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-for="todo in todos" v-bind:key="todo.id">
+      <TodoItem v-bind:name="todo.name" v-bind:date="todo.date" v-bind:done="todo.done"/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TodoItem from "./components/TodoItem";
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
-  }
-}
+    TodoItem
+  },
+  data() {
+    return {
+      todos: [
+        { id: 1, name: "uno", done: true, date: "03/03/19" },
+        { id: 2, name: "dos", done: false, date: "04/04/19" },
+        { id: 3, name: "tres", done: false, date: "05/05/19" }
+      ]
+    };
+  },
+  methods: {}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>
