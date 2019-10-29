@@ -1,46 +1,67 @@
 <template>
-  <div class="item-container">
-    <div class="item-name">{{name}}</div>
-    <div class="item-content">{{content}}</div>
-    <div class="item-date">{{date}}</div>
-  </div>
+	<div class="card container" @click="selectTask(task.id)">
+		<div class="card-body px-0">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm">
+						<h5 class="card-title text-dark">{{task.name}}</h5>
+					</div>
+					<div class="col-sm">
+						<h6>
+							<span
+								v-if="task.done === true"
+								v-bind:class="[task.done ? 'badge-success' : 'badge-info']"
+								class="badge"
+							>done</span>
+							<span
+								v-if="task.done === false"
+								v-bind:class="[task.done ? 'badge-success' : 'badge-info']"
+								class="badge"
+							>todo</span>
+						</h6>
+					</div>
+				</div>
+			</div>
+			<p class="card-text text-dark">{{task.content}}</p>
+			<div class="row">
+				<div class="col-sm">
+					<a
+						:href="false"
+						v-if="task.done === true"
+						class="btn btn-sm btn-block"
+						@click="toggleDone(task.id)"
+						v-bind:class="[task.done ? 'btn-success' : 'btn-info']"
+					>Not done</a>
+					<a
+						:href="false"
+						v-if="task.done === false"
+						class="btn btn-sm btn-block"
+						@click="toggleDone(task.id)"
+						v-bind:class="[task.done ? 'btn-success' : 'btn-info']"
+					>Done</a>
+				</div>
+				<div class="col-sm">
+					<a :href="false" class="btn btn-sm btn-danger btn-block" @click="deleteTask(task.id)">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
-  name: "TodoItem",
-  props: {
-    name: String,
-    content: String,
-    date: String
-  }
+	name: 'TodoItem',
+	props: {
+		task: Object
+	},
+	methods: mapActions(['deleteTask', 'selectTask', 'toggleDone'])
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.item-container {
-  width: 100%;
-  height: 5rem;
-  padding: 0.5rem;
-  border: solid 1px #52b952;
-  background: #7ae77a;
-  color: #1f1e1e;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  border-radius: 8px;
-}
-div.item-name {
-  width: 20%;
-}
-div.item-content {
-  width: 50%;
-}
-div.item-date {
-  width: 30%;
+.card.container {
+	margin: 0;
 }
 </style>

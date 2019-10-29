@@ -1,10 +1,16 @@
-import tasksStore from "./tasksStore";
+import tasksStore from './tasksStore';
 
 export default {
-  state: {
-    ...tasksStore.state
-  },
-  mutations: {
-    ...tasksStore.mutations
-  }
+	state: {
+		...tasksStore.state
+	},
+	actions: {
+		...tasksStore.actions
+	},
+	mutations: {
+		...tasksStore.mutations
+	},
+	getters: {
+		...tasksStore.getters
+	}
 };
